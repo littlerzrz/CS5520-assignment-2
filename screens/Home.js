@@ -4,7 +4,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase/firebase_setup";
 import { ExpenseList } from "../components";
 import { screenOptions } from "../vars";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../vars";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -37,7 +37,8 @@ export default function Home() {
   const headerRight = () => (
     <Pressable
       onPress={() => navigation.navigate("Add")}
-      style={{ marginRight: 20 }}
+      style={({ pressed }) => ({ marginRight: 20, opacity: pressed ? 0.5 : 1 })}
+      android_ripple={{ color: colors.LIGHT, foreground: true }}
     >
       <Text style={{ color: colors.WHITE, fontSize: 24 }}>+</Text>
     </Pressable>
@@ -48,12 +49,11 @@ export default function Home() {
     tabBarStyle: {
       backgroundColor: colors.DARK,
     },
-    tabBarActiveTintColor: colors.MID_LIGHT,
+    tabBarActiveTintColor: colors.MID,
+    tabBarInactiveTintColor: colors.MID_DARK,
   };
   return (
-    <Tab.Navigator
-      screenOptions={newScreenOptions}
-    >
+    <Tab.Navigator screenOptions={newScreenOptions}>
       <Tab.Screen
         name="All"
         options={{

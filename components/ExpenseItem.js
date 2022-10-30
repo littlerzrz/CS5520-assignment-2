@@ -1,14 +1,20 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Button, Pressable } from "react-native";
 import React from "react";
-import { colors } from "../vars";
+import { colors, pressedStyle } from "../vars";
 
 export default function ExpenseItem({ item }) {
   const navigation = useNavigation();
   const backgroundColor = item.important ? colors.MID : colors.MID_DARK;
   return (
     <View style={styles.main}>
-      <Pressable onPress={() => navigation.navigate("Edit", { id: item.id })}>
+      <Pressable
+        onPress={() => navigation.navigate("Edit", { id: item.id })}
+        style={({ pressed }) => {
+          return pressed && pressedStyle;
+        }}
+        android_ripple={{ color: colors.LIGHT, foreground: true }}
+      >
         <View style={[styles.container, { backgroundColor }]}>
           <Text style={styles.text}>{item.description}</Text>
           <View style={styles.cost}>
@@ -21,9 +27,8 @@ export default function ExpenseItem({ item }) {
 }
 
 const styles = StyleSheet.create({
-  main:{
-    margin:8,
-
+  main: {
+    margin: 8,
   },
   container: {
     flexDirection: "row",
@@ -33,10 +38,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 5,
-    shadowRadius:5,
-    shadowOpacity:0.4,
-    shadowOffset:{width:1, height:2},
-    shadowColor:colors.DARK
+    shadowRadius: 5,
+    shadowOpacity: 0.4,
+    shadowOffset: { width: 1, height: 2 },
+    shadowColor: colors.DARK,
   },
   text: {
     fontSize: 20,
