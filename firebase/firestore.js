@@ -1,6 +1,6 @@
 import { collection, addDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
 
-import { firestore } from "./firebase-setup";
+import { firestore } from './firebase_setup';
 
 export async function addExpense(expense) {
   try {
