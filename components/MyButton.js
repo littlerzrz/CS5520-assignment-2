@@ -18,12 +18,12 @@ export default function MyButton({ text, onPress, type = "normal" }) {
 }
 const normalBtn = {
   padding: 12,
-  width: 200,
-  height: 60,
+  height: 50,
+  minWidth:160,
   borderRadius: 5,
   shadowRadius: 3,
   shadowOpacity: 0.2,
-  margin: 14,
+  margin: 16,
   borderWidth: 2,
   shadowOffset: { width: 1, height: 2 },
   shadowColor: colors.DARK,

@@ -15,8 +15,8 @@ export default function App() {
           component={Home}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Edit" component={EditExpense} />
-        <Stack.Screen name="Add" component={AddExpense} />
+        <Stack.Screen name="Edit" component={EditExpense} options={{headerTitle:'Edit Expense'}} />
+        <Stack.Screen name="Add" component={AddExpense} options={{headerTitle:'Add Expense'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
