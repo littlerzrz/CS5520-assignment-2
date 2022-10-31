@@ -1,4 +1,4 @@
-import { collection, addDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, setDoc, getDoc } from "firebase/firestore";
 
 import { firestore } from './firebase_setup';
 
@@ -18,10 +18,11 @@ export async function deleteExpense(key) {
   }
 }
 
-export async function markImportant(key) {
+export async function toggleImportance(key) {
   try {
     const exp = doc(firestore, "expenses", key);
-    await setDoc(exp, { important: true }, { merge: true });
+    const item = await getDoc(exp);
+    await setDoc(exp, { important: !item.data().important }, { merge: true });
   } catch (err) {
     console.log(err);
   }

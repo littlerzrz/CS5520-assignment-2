@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase/firebase_setup";
-import { ExpenseList } from "../components";
+import { MyButton, ExpenseList } from "../components";
 import { screenOptions } from "../vars";
-import { Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../vars";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 const Tab = createBottomTabNavigator();
 
 export default function Home() {
@@ -35,13 +33,7 @@ export default function Home() {
     };
   }, []);
   const headerRight = () => (
-    <Pressable
-      onPress={() => navigation.navigate("Add")}
-      style={({ pressed }) => ({ marginRight: 20, opacity: pressed ? 0.5 : 1 })}
-      android_ripple={{ color: colors.LIGHT, foreground: true }}
-    >
-      <Text style={{ color: colors.WHITE, fontSize: 24 }}>+</Text>
-    </Pressable>
+    <MyButton onPress={() => navigation.navigate("Add")} text="+" type="text" />
   );
   const newScreenOptions = {
     ...screenOptions,
