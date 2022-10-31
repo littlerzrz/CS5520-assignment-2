@@ -1,18 +1,32 @@
 import { View, StyleSheet, Alert } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MyButton } from "../components";
 import { deleteExpense, toggleImportance } from "../firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import { doc, onSnapshot } from "firebase/firestore";
+import { firestore } from "../firebase/firebase_setup";
 
 export default function EditExpense({ route }) {
+  const {id} = route.params;
   const navigation = useNavigation();
+  const [item, setItem] = useState({});
+  useEffect(() => {
+    const unsubscribe = onSnapshot(doc(firestore, "expenses", id), (doc) => {
+      if(!doc.exists) return;
+      setItem(doc.data());
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const onConfirmMark = () =>
-    toggleImportance(route.params.id).then(navigation.goBack);
+    toggleImportance(id, !item.important).then(navigation.goBack);
 
   const onMark = () => {
     Alert.alert(
       "Important",
-      "Are you sure you want to toggle its importance?",
+      `Are you sure you want to ${item.important? 'remove' : 'mark'} important?`,
       [
         { text: "No", onPress: () => {} },
         { text: "Yes", onPress: onConfirmMark },
@@ -20,7 +34,7 @@ export default function EditExpense({ route }) {
     );
   };
   const onConfirmDelete = () =>
-    deleteExpense(route.params.id).then(navigation.goBack);
+    deleteExpense(id).then(navigation.goBack);
 
   const onDelete = () => {
     Alert.alert("Delete", "Are you sure you want to delete this expense?", [
@@ -30,7 +44,7 @@ export default function EditExpense({ route }) {
   };
   return (
     <View style={styles.container}>
-      <MyButton text="Toggle Importance" type="primary" onPress={onMark} />
+      <MyButton text={`${item.important ? 'Remove' : 'Mark'} Important`} type="primary" onPress={onMark} />
       <MyButton text="Delete" onPress={onDelete} />
     </View>
   );
