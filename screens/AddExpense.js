@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    marginTop: 80,
+    paddingTop: 80,
+    backgroundColor: colors.LIGHT,
   },
   text: {
     fontSize: 24,
@@ -84,11 +85,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     height: 50,
     width: 350,
-    backgroundColor: colors.LIGHT,
+    backgroundColor: colors.WHITE,
     borderRadius: 5,
     padding: 10,
-    borderColor:colors.DARK,
-    borderWidth:1,
+    borderColor: colors.DARK,
+    borderWidth: 1,
   },
   textArea: {
     height: 150,
@@ -96,6 +97,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
-    marginTop:30
+    marginTop: 30,
   },
 });

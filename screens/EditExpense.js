@@ -5,6 +5,7 @@ import { deleteExpense, toggleImportance } from "../firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase/firebase_setup";
+import { colors } from "../vars";
 
 export default function EditExpense({ route }) {
   const {id} = route.params;
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    marginTop:80
+    paddingTop:80,
+    backgroundColor:colors.LIGHT
   },
 });
