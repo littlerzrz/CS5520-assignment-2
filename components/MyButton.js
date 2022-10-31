@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     text: {
-      fontSize: 24,
+      fontSize: 32,
       color: colors.WHITE,
     },
   },

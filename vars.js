@@ -2,7 +2,7 @@ const colors = {
   DARK: "#695B96",
   MID_DARK: "#9DD9D2",
   MID: "#FF8811",
-  MID_LIGHT: "#FFE9AD",
+  MID_LIGHT: "#FFEFC2",
   LIGHT: "#FFF8F0",
   WHITE: "#FFF",
 };

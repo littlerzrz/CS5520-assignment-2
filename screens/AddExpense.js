@@ -84,9 +84,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     height: 50,
     width: 350,
-    backgroundColor: colors.MID_LIGHT,
+    backgroundColor: colors.LIGHT,
     borderRadius: 5,
     padding: 10,
+    borderColor:colors.DARK,
+    borderWidth:1,
   },
   textArea: {
     height: 150,
@@ -94,5 +96,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    marginTop:30
   },
 });
