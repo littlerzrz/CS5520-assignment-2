@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Alert,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import { MyButton } from "../components";
 import { colors } from "../vars";
@@ -23,34 +30,43 @@ export default function AddExpense() {
       navigation.goBack();
     });
   };
-  const onCancel = () => {};
+  const onClear = () => {
+    setDescription("");
+    setCost("");
+  };
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Your Expense</Text>
-      <View style={{ marginTop: 30 }}>
-        <Text>Amount</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          onChangeText={setCost}
-          value={cost}
-        />
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      keyboardShouldPersistTaps="handled"
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>Your Expense</Text>
+        <View style={{ marginTop: 30 }}>
+          <Text>Amount</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            onChangeText={setCost}
+            value={cost}
+          />
+        </View>
+
+        <View style={{ marginTop: 30 }}>
+          <Text>Description</Text>
+          <TextInput
+            style={[styles.input, styles.textArea]}
+            onChangeText={setDescription}
+            value={description}
+            multiline={true}
+            numberOfLines={4}
+          />
+        </View>
+        <View style={styles.buttons}>
+          <MyButton text="Clear" onPress={onClear} />
+          <MyButton text="Submit" type="primary" onPress={onSubmit} />
+        </View>
       </View>
-      <View style={{ marginTop: 30 }}>
-        <Text>Description</Text>
-        <TextInput
-          style={[styles.input, styles.textArea]}
-          multiline={true}
-          numberOfLines={4}
-          onChangeText={setDescription}
-          value={description}
-        />
-      </View>
-      <View style={styles.buttons}>
-        <MyButton text="Cancel" onPress={onCancel} />
-        <MyButton text="Submit" type="primary" onPress={onSubmit} />
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -74,7 +90,7 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 150,
-    textAlign: "top",
+    textAlignVertical: "top",
   },
   buttons: {
     flexDirection: "row",
